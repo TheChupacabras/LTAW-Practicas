@@ -1,0 +1,74 @@
+body {
+    
+    background-image: url(Fondo.jpg);
+    background-size: cover;
+  }
+
+#titulo{
+
+    color: rgb(255, 196, 1);
+    font-family: cursive;
+    font-size: 60px;
+}
+
+#guitars{
+    text-align:center;
+    margin: 50px 100px 100px 100px;
+    color: rgb(255, 196, 1);
+}
+#acustica-pic{
+    border-style: outset;
+    border-width: 4px;
+    border-color: rgb(255, 196, 1);
+    margin: 30px 40px 30px 20px;
+    max-width: 300px;
+    max-height: 400px;
+}
+
+#lespaul-pic{
+    border-style: outset;
+    border-width: 4px;
+    border-color: rgb(255, 196, 1);
+    margin: 30px 40px 30px 20px;
+    max-width: 350px;
+    max-height: 400px;
+}
+
+#estrato-pic{
+    border-style: outset;
+    border-width: 4px;
+    border-color: rgb(255, 196, 1);
+    margin: 30px 40px 30px 20px;
+    max-width: 400px;
+    max-height: 225px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+#carrito-pic{
+
+    height: 20px;
+    width: 20px;
+}

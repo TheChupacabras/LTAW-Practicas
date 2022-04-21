@@ -14,6 +14,8 @@ var mine = {
         'css'  : 'text/css',
         'jpg'  : 'image/jpg',
         'js'   : 'text/js',
+        'png'  : 'im-ñlage/png',
+        'gif'  : 'image/gif',
       
     };
 
@@ -45,8 +47,8 @@ const server = http.createServer(function (req, res) {
     console.log("Filename:",filename);
 
 
-    content = myUrl.pathname.split(["."])[1];
-    content_type = myUrl.pathname.slice(content);
+    let select = myUrl.pathname.lastIndexOf(".");
+    let content_type = myUrl.pathname.slice(select + 1);
     console.log("Tipo de mine:", mine[content_type])
 
 
