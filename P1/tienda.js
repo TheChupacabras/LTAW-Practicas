@@ -14,7 +14,7 @@ var mine = {
         'css'  : 'text/css',
         'jpg'  : 'image/jpg',
         'js'   : 'text/js',
-        'png'  : 'im-ñlage/png',
+        'png'  : 'image/png',
         'gif'  : 'image/gif',
       
     };
@@ -39,9 +39,9 @@ const server = http.createServer(function (req, res) {
     //buscamos archivo
     if(myUrl.pathname == '/'){
         //inicio
-        filename = "./tienda.html";
+        filename += "./tienda.html";
     }else{
-        filename = "." + myUrl.pathname;
+        filename += "." + myUrl.pathname;
     }
     
     console.log("Filename:",filename);
@@ -49,7 +49,7 @@ const server = http.createServer(function (req, res) {
 
     let select = myUrl.pathname.lastIndexOf(".");
     let content_type = myUrl.pathname.slice(select + 1);
-    console.log("Tipo de mine:", mine[content_type])
+    console.log("type of mine:", mine[content_type])
 
 
     fs.readFile(filename, function(err, data){
@@ -71,4 +71,4 @@ const server = http.createServer(function (req, res) {
 
 server.listen(PUERTO);
 
-console.log("La pagina está activa. Escuchando en puerto: " + PUERTO);
+console.log("Web is working. Listening on port:: " + PUERTO);
