@@ -8,34 +8,16 @@
                 "precio": 1000
                 },
                 {
-                "nombre": "Lespaul deluxe",
-                "descripcion": "cuerpo caoba, tapa de arce flameado de grado AA, fijacion de mastil encolado",
-                "stock": 5,
-                "precio": 499
-                },
-                {
                 "nombre": "Ibanez D-120CE",
                 "descripcion": "estilo Dreadnought, con cutaway, tapa de pícea",
                 "stock": 5,
                 "precio": 300
                 },
                 {
-                "nombre": "Ibanez j-185EC",
-                "descripcion": "estilo jumbo, fabricada en estados unidos, diapason de nogal",
-                "stock": 5,
-                "precio": 649
-                },
-                {
                 "nombre": "Fender Jaguar",
                 "descripcion": "cuerpo aliso, mastil de arce con acabado satinado, diapason de pau ferro",
                 "stock": 5,
                 "precio": 649
-                },
-                {
-                "nombre": "Fender Player Series Strat",
-                "descripcion": "3 pastillas, mastil de arce con acabado satinado, diapason de arce",
-                "stock": 5,
-                "precio": 700
                 }
         ],
         
