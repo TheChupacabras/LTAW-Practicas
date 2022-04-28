@@ -25,6 +25,14 @@ tienda.productos.forEach((element,index)=>{
 });
 console.log( "\n");
 
+
+//-- Cargar pagina web del formulario
+const FORMULARIO = fs.readFileSync('form1.html','utf-8');
+
+//-- HTML de la página de respuesta
+const RESPUESTA = fs.readFileSync('form1-resp2.html', 'utf-8');
+
+
 // mine utilizado
 var mine = {
         '/'    : 'text/html',
@@ -34,7 +42,7 @@ var mine = {
         'js'   : 'text/js',
         'png'  : 'image/png',
         'gif'  : 'image/gif',
-      
+        'procesar' : 'text/html'
     };
 
 
@@ -49,25 +57,42 @@ const server = http.createServer(function (req, res) {
     let filename = ""
     const myUrl = new URL(req.url, 'http://' + req.headers['host']);
     console.log("\nSe ha solicitado el recurso: " + myUrl.pathname);
-
+    let content_type = "text/html";
+    
     
     console.log("Peticion Recibida: " + myUrl);
+    console.log("");
+    console.log("Método: " + req.method);
+    console.log("Recurso: " + req.url);
+    console.log("  Ruta: " + myUrl.pathname);
+    console.log("  Parametros: " + myUrl.searchParams);
 
 
-    //buscamos archivo
-    if(myUrl.pathname == '/'){
-        //inicio
+    if(myUrl.pathname == '/procesar'){
+        console.log("Lo ha pilñlado");
+        content_type = "text/html";
+        let nombre = myUrl.searchParams.get('nombre');
+        let apellidos = myUrl.searchParams.get('apellidos');
+        data = RESPUESTA.replace("NOMBRE", nombre);
+        data = data.replace("APELLIDOS", apellidos);
+         //-- Enviar la respuesta
+        res.setHeader('Content-Type', content_type);
+        res.write(data);
+    }else if(myUrl.pathname == '/'){
         filename += "./tienda.html";
+        let select = myUrl.pathname.lastIndexOf(".");
+        content_type = myUrl.pathname.slice(select + 1);
+        console.log("type of mine:", mine[content_type])
     }else{
         filename += "." + myUrl.pathname;
+        console.log("Filename:",filename);
+        let select = myUrl.pathname.lastIndexOf(".");
+        content_type = myUrl.pathname.slice(select + 1);
+        console.log("type of mine:", mine[content_type])
     }
+
+
     
-    console.log("Filename:",filename);
-
-
-    let select = myUrl.pathname.lastIndexOf(".");
-    let content_type = myUrl.pathname.slice(select + 1);
-    console.log("type of mine:", mine[content_type])
 
 
     fs.readFile(filename, function(err, data){
