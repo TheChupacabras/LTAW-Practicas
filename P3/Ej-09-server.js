@@ -8,7 +8,8 @@ const PUERTO = 8080;
 
 var usuario = 0;
 nombreusuario = [1];
-
+const tiempoTranscurrido = Date.now();
+const hoy = new Date(tiempoTranscurrido)
 //-- Crear una nueva aplciacion web
 const app = express();
 
@@ -58,8 +59,13 @@ io.on('connect', (socket) => {
       "<br/>/hello: El servidor nos devolverá el saludo"  + "<br/>/date: Nos devolverá la fecha");   
     } else if (msg== '/list') { 
       socket.send('<p style="color:red">' + "Hay: " + usuario + " usuarios conectados" + '</p');
+    } else if (msg== '/hello') { 
+      socket.send('<p style="color:red">' + "El servidor manda saludos a usuario" + usuario +  '</p');
+    } else if (msg== '/date') { 
+      socket.send('<p style="color:red">' + hoy.toDateString() +  '</p');
     } else if (msg.split("/")[0] == "") {  
       socket.send('<p style="color:red">' + "Comando no valido consulte /help para ver los comandos disponibles" + '</p'); 
+      
     } else {
       console.log("Mensaje Recibido!: " + msg.blue);
     var index = nombreusuario.indexOf(socket.id);
