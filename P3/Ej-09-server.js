@@ -6,8 +6,8 @@ const colors = require('colors');
 
 const PUERTO = 8080;
 
-var usuario = 1;
-nombreusuario = [];
+var usuario = 0;
+nombreusuario = [1];
 
 //-- Crear una nueva aplciacion web
 const app = express();
@@ -43,7 +43,7 @@ io.on('connect', (socket) => {
   socket.send('<p style="color:red">' + "Bienvenido" + '</p');
   console.log('** NUEVA CONEXIÓN **'.yellow);
   var index = nombreusuario.indexOf(socket.id);
-  io.send("SE HA CONECTADO " + 'usuario'+ index + ':');
+  io.send("SE HA CONECTADO " + 'usuario'+ index  + ': ');
   //-- Evento de desconexión
   socket.on('disconnect', function(){
     console.log('** CONEXIÓN TERMINADA **'.yellow);
@@ -52,10 +52,20 @@ io.on('connect', (socket) => {
 
   //-- Mensaje recibido: Reenviarlo a todos los clientes conectados
   socket.on("message", (msg)=> {
-    console.log("Mensaje Recibido!: " + msg.blue);
+    
+    if (msg== '/help') { 
+      socket.send('<p style="color:red">' + "Los comandos permitidos son:"   + "<br/>/list: Devolverá el número de usuarios conectados" +
+      "<br/>/hello: El servidor nos devolverá el saludo"  + "<br/>/date: Nos devolverá la fecha");   
+    } else if (msg== '/list') { 
+      socket.send('<p style="color:red">' + "Hay: " + usuario + " usuarios conectados" + '</p');
+    } else if (msg.split("/")[0] == "") {  
+      socket.send('<p style="color:red">' + "Comando no valido consulte /help para ver los comandos disponibles" + '</p'); 
+    } else {
+      console.log("Mensaje Recibido!: " + msg.blue);
     var index = nombreusuario.indexOf(socket.id);
     //-- Reenviarlo a todos los clientes conectados
-    io.send('usuario'+ index + ': ' + msg);
+    io.send('usuario'+ index  + ': ' + msg);
+    }
   });
 
 });
