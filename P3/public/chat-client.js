@@ -1,6 +1,7 @@
 //-- Elementos del interfaz
 const display = document.getElementById("display");
 const msg_entry = document.getElementById("msg_entry");
+const sound = document.getElementById("sound");
 
 //-- Crear un websocket. Se establece la conexión con el servidor
 const socket = io();
@@ -8,6 +9,7 @@ const socket = io();
 
 socket.on("message", (msg)=>{
   display.innerHTML +=   msg + '</p>';
+  sound.play();
 });
 
 //-- Al apretar el botón se envía un mensaje al servidor

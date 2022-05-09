@@ -11,11 +11,14 @@
   <script src="/socket.io/socket.io.js"></script>
 
   <!-- Cliente que usa los Sockets.io-->
-  <script src="server-client.js" defer></script>
+  <script src="chat-client.js" defer></script>
 </head>
 
 <body>
-  <p id="display"></p>
-  <input type="text" placeholder="Escribe aquí los mensajes..." autocomplete="off" id="msg_entry">
+  <audio id="sound" src="/public/meow.mp3"></audio>
+  <div>
+    <p id="display"></p>
+    <input type="text" placeholder="Escribe aquí los mensajes..." autocomplete="off" id="msg_entry">
+  </div>
 </body>
 </html>
