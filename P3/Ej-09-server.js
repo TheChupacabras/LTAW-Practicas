@@ -25,7 +25,7 @@ const io = socket(server);
 //-------- PUNTOS DE ENTRADA DE LA APLICACION WEB
 //-- Definir el punto de entrada principal de mi aplicación web
 app.get('/', (req, res) => {
-  res.send('Bienvenido a mi aplicación Web!!!' + '<p><a href="/Ej-09.html">Test</a></p>');
+res.sendFile(__dirname + "/public/main.html");
 });
 
 //-- Esto es necesario para que el servidor le envíe al cliente la
@@ -63,6 +63,8 @@ io.on('connect', (socket) => {
       socket.send('<p style="color:red">' + "El servidor manda saludos a usuario" + usuario +  '</p');
     } else if (msg== '/date') { 
       socket.send('<p style="color:red">' + hoy.toDateString() +  '</p');
+    } else if (msg== '/users') { 
+      socket.send('<p style="color:red">' +  "Actualmente hay " + usuario  + " usuarios conectados" + '</p');
     } else if (msg.split("/")[0] == "") {  
       socket.send('<p style="color:red">' + "Comando no valido consulte /help para ver los comandos disponibles" + '</p'); 
       
