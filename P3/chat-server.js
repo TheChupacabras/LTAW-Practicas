@@ -4,7 +4,11 @@ const http = require('http');
 const express = require('express');
 const colors = require('colors');
 
+
 const PUERTO = 8080;
+
+
+var seudonimo = [];
 
 var usuario = 0;
 nombreusuario = [1];
@@ -35,22 +39,41 @@ app.use('/', express.static(__dirname +'/'));
 //-- El directorio publico contiene ficheros estáticos
 app.use(express.static('public'));
 
+
+  
+
 //------------------- GESTION SOCKETS IO
 //-- Evento: Nueva conexion recibida
 io.on('connect', (socket) => {
   
+
+  //-- pedimos un nick al usuario
+  socket.on("nick", (nick) => {
+  seudonimo.push(nick);
   usuario += 1;
   nombreusuario.push(socket.id);
+ 
   socket.send('<p style="color:red">' + "Bienvenido" + '</p');
   console.log('** NUEVA CONEXIÓN **'.yellow);
+  
   var index = nombreusuario.indexOf(socket.id);
-  io.send("SE HA CONECTADO " + 'usuario'+ index  + ': ');
+  io.send('<p style="color:red">' + "Se ha conectado " + seudonimo[usuario-1] + '</p');
+  
+  
+
   //-- Evento de desconexión
   socket.on('disconnect', function(){
     console.log('** CONEXIÓN TERMINADA **'.yellow);
     usuario -= 1;
+    io.send('<p style="color:red">'+ nick + " ha abandonado el chat" + '</p');
+    let cliente = seudonimo.indexOf(nick);
+    seudonimo.splice(cliente, 1);
   });  
 
+//-- Cojo el nombre
+socket.on("nick", (nick) => {
+  seudonimo.push(nick);
+}); 
   //-- Mensaje recibido: Reenviarlo a todos los clientes conectados
   socket.on("message", (msg)=> {
     
@@ -64,7 +87,7 @@ io.on('connect', (socket) => {
     } else if (msg== '/date') { 
       socket.send('<p style="color:red">' + hoy.toDateString() +  '</p');
     } else if (msg== '/users') { 
-      socket.send('<p style="color:red">' +  "Actualmente hay " + usuario  + " usuarios conectados" + '</p');
+      socket.send('<p style="color:red">' +  "Actualmente estan conectados " + seudonimo  + '</p');
     } else if (msg.split("/")[0] == "") {  
       socket.send('<p style="color:red">' + "Comando no valido consulte /help para ver los comandos disponibles" + '</p'); 
       
@@ -72,10 +95,10 @@ io.on('connect', (socket) => {
       console.log("Mensaje Recibido!: " + msg.blue);
     var index = nombreusuario.indexOf(socket.id);
     //-- Reenviarlo a todos los clientes conectados
-    io.send('usuario'+ index  + ': ' + msg);
+    io.send(nick +  ': ' + msg);
     }
   });
-
+});
 });
 
 //-- Lanzar el servidor HTTP
