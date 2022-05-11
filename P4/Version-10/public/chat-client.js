@@ -2,7 +2,6 @@
 const display = document.getElementById("display");
 const msg_entry = document.getElementById("msg_entry");
 const nickname = document.getElementById("nick");
-const music = new Audio('meow.mp3');
 
 
 
@@ -17,10 +16,8 @@ console.log(nick);
 socket.emit('nick', nick);
 
 
-
 socket.on("message", (msg)=>{
   display.innerHTML +=   msg + '</p>';
-  music.play();
 });
 
 //-- Al apretar el botón se envía un mensaje al servidor
