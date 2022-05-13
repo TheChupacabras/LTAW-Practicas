@@ -103,6 +103,7 @@ socket.on("nick", (nick) => {
     var index = nombreusuario.indexOf(socket.id);
     //-- Reenviarlo a todos los clientes conectados
     io.send(nick +  ': ' + msg);
+    win.webContents.send('msg', msg);
     }
   });
 });
@@ -156,6 +157,13 @@ electron.app.on('ready', () => {
     win.webContents.send('ip', address);
   });
 
+});
+
+
+//cuando se pulsa boton se envia a los usuarios conectados
+electron.ipcMain.handle('test', (event, msg) => {
+  console.log(msg);
+  io.send(msg);
 });
 
 server.listen(PUERTO);

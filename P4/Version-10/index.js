@@ -27,6 +27,7 @@ info4.textContent = process.versions.chrome;
 
 btn_test.onclick = () => {
     display.innerHTML += "TEST! ";
+    electron.ipcRenderer.invoke('test', "Mensaje de prueba");
     console.log("Botón apretado!");
 }
 
@@ -45,4 +46,8 @@ electron.ipcRenderer.on('usuario', (event, usuario) => {
   info5.textContent = usuario;
   console.log(usuario);
 
+});
+
+electron.ipcRenderer.on('msg', (event, msg) => {
+  display.innerHTML += msg + "<br>";
 });
