@@ -58,7 +58,7 @@ io.on('connect', (socket) => {
   seudonimo.push(nick);
   usuario += 1;
   nombreusuario.push(socket.id);
- 
+  win.webContents.send('usuario', usuario);
   socket.send('<p style="color:red">' + "Bienvenido" + '</p');
   console.log('** NUEVA CONEXIÓN **'.yellow);
   
@@ -74,6 +74,7 @@ io.on('connect', (socket) => {
     io.send('<p style="color:red">'+ nick + " ha abandonado el chat" + '</p');
     let cliente = seudonimo.indexOf(nick);
     seudonimo.splice(cliente, 1);
+    win.webContents.send('usuario', usuario);
   });  
 
 //-- Cojo el nombre
@@ -125,7 +126,7 @@ electron.app.on('ready', () => {
 
     //-- Crear la ventana principal de nuestra aplicación
     win = new electron.BrowserWindow({
-        width: 600,   //-- Anchura 
+        width: 800,   //-- Anchura 
         height: 600,  //-- Altura
 
         //-- Permitir que la ventana tenga ACCESO AL SISTEMA
@@ -152,7 +153,7 @@ electron.app.on('ready', () => {
   //-- lo saque por la interfaz gráfica
   win.on('ready-to-show', () => {
     console.log("HOLA?");
-    win.webContents.send('print', "MENSAJE ENVIADO DESDE PROCESO MAIN");
+    win.webContents.send('ip', address);
   });
 
 });
