@@ -1,7 +1,7 @@
 h1 {
     width: 93%;
     padding: 20px;
-    background-color: lightgreen;
+    background-color: #B4BDD1;
     border-radius: 10px;
     text-align: center;
   }
@@ -20,7 +20,7 @@ h1 {
   }
 
   #pantallote{
-    color: green;
+    color: rgb(0, 0, 0);
 
   }
 
