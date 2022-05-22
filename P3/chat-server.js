@@ -79,7 +79,7 @@ socket.on("nick", (nick) => {
     
     if (msg== '/help') { 
       socket.send('<p style="color:red">' + "Los comandos permitidos son:"   + "<br/>/list: Devolverá el número de usuarios conectados" +
-      "<br/>/hello: El servidor nos devolverá el saludo"  + "<br/>/date: Nos devolverá la fecha");   
+      "<br/>/hello: El servidor nos devolverá el saludo"  + "<br/>/users: Nos devolverá los nombres de los usuarios conectados" + "<br/>/date: Nos devolverá la fecha");   
     } else if (msg== '/list') { 
       socket.send('<p style="color:red">' + "Hay: " + usuario + " usuarios conectados" + '</p');
     } else if (msg== '/hello') { 
