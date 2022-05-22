@@ -71,13 +71,14 @@ const server = http.createServer(function (req, res) {
     if(myUrl.pathname == '/procesar'){
         console.log("Lo ha pilñlado");
         content_type = "text/html";
-        let nombre = myUrl.searchParams.get('nombre');
-        let apellidos = myUrl.searchParams.get('apellidos');
-        data = RESPUESTA.replace("NOMBRE", nombre);
-        data = data.replace("APELLIDOS", apellidos);
-         //-- Enviar la respuesta
+        let usuario = myUrl.searchParams.get('usuario');
+        let email = myUrl.searchParams.get('email');
+        data = RESPUESTA.replace("usuario", usuario);
+        data = data.replace("email", email);
+        //-- Enviar la respuesta
         res.setHeader('Content-Type', content_type);
         res.write(data);
+
     }else if(myUrl.pathname == '/'){
         filename += "./tienda.html";
         let select = myUrl.pathname.lastIndexOf(".");
@@ -91,7 +92,7 @@ const server = http.createServer(function (req, res) {
         console.log("type of mine:", mine[content_type])
     }
 
-
+    
     
 
 
